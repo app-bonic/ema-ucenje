@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Povijest – rani srednji vijek</title>
+<meta name="description" content="Interaktivno učenje i kviz: seoba naroda, Franci, Bizant i ranosrednjovjekovna Hrvatska.">
+<style>
+:root {
+  --bg: #f6f1e7;
+  --card: #fffdf8;
+  --ink: #1d2433;
+  --muted: #5d6475;
+  --line: #e2d9c6;
+  --accent: #9a3b1f;
+  --accent-ink: #ffffff;
+  --accent-soft: #f3e2d6;
+  --ok: #1f7a4a;
+  --ok-bg: #e3f4ea;
+  --bad: #b3261e;
+  --bad-bg: #fbe5e3;
+  --chip: #efe6d4;
+  --shadow: 0 1px 2px rgba(29,36,51,.06), 0 4px 16px rgba(29,36,51,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171c;
+    --card: #1e2128;
+    --ink: #ece7dc;
+    --muted: #a3a8b4;
+    --line: #333844;
+    --accent: #e0885f;
+    --accent-ink: #1a1a1a;
+    --accent-soft: #3a2a22;
+    --ok: #6fd39c;
+    --ok-bg: #1d3328;
+    --bad: #ff8a80;
+    --bad-bg: #3a2220;
+    --chip: #2a2e37;
+    --shadow: none;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+main { max-width: 760px; margin: 0 auto; padding: 0 16px 48px; }
+header.site { padding: 22px 0 6px; }
+header.site a.back { color: var(--muted); font-size: .88rem; text-decoration: none; }
+h1 { font-family: Georgia, "Times New Roman", serif; font-size: 1.9rem; line-height: 1.2; margin: 6px 0 4px; }
+h2 { font-size: 1.05rem; margin: 22px 0 10px; }
+.lead { color: var(--muted); margin: 0 0 4px; }
+
+/* tabovi */
+nav.tabs {
+  position: sticky; top: 0; z-index: 5; background: var(--bg);
+  display: flex; gap: 4px; padding: 10px 0; margin-bottom: 14px; border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+nav.tabs a {
+  flex: 1 0 auto; text-align: center; text-decoration: none; color: var(--ink);
+  padding: 9px 14px; border-radius: 10px; font-weight: 600; font-size: .95rem; white-space: nowrap;
+}
+nav.tabs a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+nav.tabs a:not([aria-current="page"]):hover { background: var(--chip); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1px solid var(--line); background: var(--chip); color: var(--ink);
+  border-radius: 999px; padding: 7px 14px; font: inherit; font-size: .92rem; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.chip small { opacity: .75; margin-left: 4px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn {
+  border: 0; border-radius: 10px; padding: 12px 20px; font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink);
+}
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.good { background: var(--ok); color: #fff; }
+.btn.bad { background: var(--bad); color: #fff; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.link { background: none; border: 0; color: var(--accent); font: inherit; cursor: pointer; padding: 0; text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: .88rem; }
+.hidden { display: none !important; }
+select {
+  font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 9px 12px; max-width: 100%;
+}
+
+/* UČI */
+.progress { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.progress .bar { flex: 1; }
+.bar { height: 8px; background: var(--chip); border-radius: 99px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s; }
+details.ch {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+details.ch > summary {
+  list-style: none; cursor: pointer; padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+  font-weight: 700;
+}
+details.ch > summary::-webkit-details-marker { display: none; }
+details.ch > summary .num {
+  flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--chip);
+  display: grid; place-items: center; font-size: .9rem;
+}
+details.ch.done > summary .num { background: var(--ok); color: #fff; }
+details.ch > summary .t { flex: 1; }
+details.ch > summary .arrow { transition: transform .2s; color: var(--muted); }
+details.ch[open] > summary .arrow { transform: rotate(90deg); }
+.ch-body { padding: 0 18px 18px; border-top: 1px solid var(--line); }
+.ch-body h3 { font-size: 1rem; margin: 18px 0 6px; color: var(--accent); }
+.ch-body ul { padding-left: 20px; margin: 6px 0; }
+.ch-body li { margin-bottom: 4px; }
+.ch-body p { margin: 10px 0; }
+.ch-body b { background: var(--accent-soft); border-radius: 4px; padding: 0 3px; }
+.key { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; border-radius: 0 10px 10px 0; margin: 12px 0; }
+.ch-body table { border-collapse: collapse; width: 100%; font-size: .93rem; margin: 10px 0; }
+.ch-body th, .ch-body td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+.ch-body th { background: var(--chip); }
+.tablewrap { overflow-x: auto; }
+.ch-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+label.learned { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; }
+label.learned input { width: 20px; height: 20px; accent-color: var(--ok); }
+
+/* KARTICE */
+.flash {
+  perspective: 1200px; cursor: pointer; margin: 14px 0; user-select: none;
+}
+.flash-inner {
+  position: relative; min-height: 230px; transition: transform .45s; transform-style: preserve-3d;
+}
+.flash.flipped .flash-inner { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow);
+  padding: 22px; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+}
+.face.back { transform: rotateY(180deg); background: var(--accent-soft); }
+.face .q { font-size: 1.2rem; font-weight: 600; line-height: 1.35; }
+.face .a { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+.face .tip { color: var(--muted); font-size: .85rem; }
+
+/* KRONOLOGIJA */
+.tl { list-style: none; padding: 0; margin: 0; position: relative; }
+.tl::before { content: ""; position: absolute; left: 92px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.tl li { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 7px 0; position: relative; }
+.tl li::before {
+  content: ""; position: absolute; left: 87px; top: 15px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--card); border: 2px solid var(--accent);
+}
+.tl .y { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.tl .ev, .tl .y { border-radius: 6px; transition: filter .2s; }
+.tl .cro { color: var(--accent); font-weight: 600; }
+.tl.hide-ev .ev:not(.shown), .tl.hide-y .y:not(.shown) { filter: blur(6px); cursor: pointer; }
+
+/* KVIZ */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); font-size: .92rem; }
+.qbar { margin: 10px 0 18px; height: 6px; }
+.topic { display: inline-block; font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.qtext { font-size: 1.25rem; font-weight: 600; margin: 6px 0 18px; line-height: 1.35; }
+.opts { display: grid; gap: 10px; }
+.opt {
+  display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%;
+  background: var(--card); color: var(--ink); border: 1.5px solid var(--line); border-radius: 12px;
+  padding: 12px 14px; font: inherit; cursor: pointer;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt .k { flex: none; width: 26px; height: 26px; border-radius: 7px; background: var(--chip); display: grid; place-items: center; font-size: .85rem; font-weight: 700; }
+.opt.ok { border-color: var(--ok); background: var(--ok-bg); }
+.opt.bad { border-color: var(--bad); background: var(--bad-bg); }
+.opt:disabled { cursor: default; }
+.fb { margin-top: 16px; padding: 12px 14px; border-radius: 10px; display: none; }
+.fb.show { display: block; }
+.fb.ok { background: var(--ok-bg); }
+.fb.bad { background: var(--bad-bg); }
+.fb b { display: block; margin-bottom: 2px; }
+.next { margin-top: 18px; display: flex; justify-content: flex-end; }
+.hint { color: var(--muted); font-size: .82rem; margin-top: 10px; text-align: right; }
+.score { font-family: Georgia, serif; font-size: 3rem; font-weight: 700; margin: 0; }
+.wrong { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.wrong li { border-left: 3px solid var(--bad); padding: 6px 0 6px 12px; }
+.wrong .yours { color: var(--bad); }
+.wrong .right { color: var(--ok); font-weight: 600; }
+footer { color: var(--muted); font-size: .8rem; text-align: center; margin-top: 32px; }
+
+@media (max-width: 520px) {
+  h1 { font-size: 1.55rem; }
+  .qtext, .face .q { font-size: 1.1rem; }
+  .card { padding: 16px; }
+  .hint { display: none; }
+  nav.tabs a { padding: 8px 10px; font-size: .9rem; }
+  .tl::before { left: 70px; }
+  .tl li { grid-template-columns: 60px 1fr; gap: 22px; }
+  .tl li::before { left: 65px; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="site">
+  <a class="back" href="../">← Sve teme</a>
+  <h1>Povijest – rani srednji vijek</h1>
+  <p class="lead">Od seobe naroda do kraja Trpimirovića (1. tema, str. 10–34)</p>
+</header>
+
+<nav class="tabs" aria-label="Načini učenja">
+  <a href="#uci" data-tab="uci">Uči</a>
+  <a href="#kartice" data-tab="kartice">Kartice</a>
+  <a href="#kronologija" data-tab="kronologija">Kronologija</a>
+  <a href="#kviz" data-tab="kviz">Kviz</a>
+</nav>
+
+<!-- ===================== UČI ===================== -->
+<section id="tab-uci" class="tab">
+  <div class="progress">
+    <div class="bar"><i id="learnBar"></i></div>
+    <span class="small muted" id="learnTxt"></span>
+  </div>
+  <p class="small muted" style="margin-top:0">Otvori poglavlje, pročitaj ga, pa ga provjeri karticama ili kvizom. Kad ga znaš, označi ga kao naučeno.</p>
+
+  <details class="ch" data-id="seoba">
+    <summary><span class="num">1</span><span class="t">Velika seoba naroda</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <div class="key"><strong>Glavna poruka:</strong> seoba naroda NIJE glavni uzrok pada Zapadnog Rimskog Carstva – presudile su njegove unutarnje slabosti.</div>
+      <h3>Zašto je naziv sporan?</h3>
+      <ul>
+        <li>Tada nisu postojali „narodi” u današnjem smislu (jasno razgraničene skupine sa zajedničkim jezikom, kulturom i područjem).</li>
+        <li>Skupine su bile mješovite, vezane zajedničkim ciljevima, pod vodstvom vojskovođe ili vladara.</li>
+        <li>Često su to bili pokreti vojničkih odreda, a ne cijelih naroda sa ženama i djecom.</li>
+      </ul>
+      <h3>Tijek događaja</h3>
+      <ul>
+        <li>Od kraja <b>4. st.</b> germanske skupine prodiru preko Dunava i Rajne.</li>
+        <li><b>375.</b> <b>Huni</b> (nomadski konjanici iz srednje Azije) napadaju <b>Gote</b> → početak seobe.</li>
+        <li>Goti: <b>Ostrogoti</b> (Istočni) i <b>Vizigoti</b> (Zapadni).</li>
+        <li><b>410.</b> vojska sastavljena uglavnom od Gota <b>osvaja Rim</b>; zatim prelazi u Galiju i Hispaniju → <b>Vizigotsko Kraljevstvo</b>.</li>
+        <li><b>Atila</b> – najpoznatiji hunski vladar; nakon njegove smrti (sredina 5. st.) Huni gube važnost.</li>
+        <li><b>Vandali</b> – kraljevstvo u sjevernoj Africi, središte <b>Kartaga</b>; <b>455.</b> pljačkaju Rim.</li>
+        <li>Rimska vlast nestaje iz <b>Britanije</b>, dolaze skupine iz Germanije.</li>
+      </ul>
+      <h3>6. stoljeće: Ostrogoti, Gepidi, Langobardi, Avari</h3>
+      <ul>
+        <li><b>Ostrogoti</b> – početkom 6. st. najveća sila; po dogovoru s istočnorimskim carem prelaze u Italiju i osnivaju državu (<b>489.–493.</b>). Država je gotovo posve rimska, samo su vladari Goti; vlast šire na Dalmaciju i južnu Panoniju.</li>
+        <li><b>Gepidi</b> – nasljednici hunske moći u srednjem Podunavlju, središte <b>Sirmij</b> (Sremska Mitrovica).</li>
+        <li><b>Langobardi</b> – u savezu s <b>Avarima</b> pobjeđuju Gepide (567.), a <b>568.</b> odlaze u Italiju → <b>kraj seobe naroda</b>.</li>
+        <li><b>Avari</b> postaju gospodari srednjeg Podunavlja; <b>Slaveni</b> pljačkaju preko donjodunavske granice, često na avarski poticaj.</li>
+      </ul>
+      <div class="key"><strong>Zapamti:</strong> „barbari” nisu htjeli srušiti Carstvo, nego se uklopiti u njega. Mnogi su već bili kršćani, a rimska kultura preživjela je u novim državama.</div>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="seoba">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="franci">
+    <summary><span class="num">2</span><span class="t">Franačka država</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <h3>Rani Franci</h3>
+      <ul>
+        <li>Prvi put se spominju potkraj 3. st. (<b>291.</b>) – skupine uz Rajnu, gusare Sjevernim morem.</li>
+        <li>Franci s ušća Rajne <b>358.</b> dobivaju dozvolu da se nasele na rimskom tlu (između današnje Belgije i Nizozemske) i služe u rimskoj vojsci.</li>
+        <li>Rimski vojskovođa <b>Aecije</b> doznačuje im područje između rijeka Somme i Schelde → tri udjelna kraljevstva.</li>
+        <li><b>451.</b> bore se uz Rimljane protiv <b>Atile</b> (Katalaunska polja). Oko 460. osvajaju Köln, zatim i Trier.</li>
+        <li>Nazivi <b>Salijski</b> (ušće Rajne) i <b>Ripuarski</b> (srednja Rajna) Franci – danas se smatra da ta podjela ne odgovara stvarnosti: franačkih skupina bilo je koliko i vladara.</li>
+      </ul>
+      <h3>Klodvig I. (o. 481.–511.) – utemeljitelj franačke države</h3>
+      <ul>
+        <li>Iz roda <b>Merovinga</b> (otac Hilderik I.). Zavladao svim franačkim skupinama.</li>
+        <li><b>486.</b> osvaja ostatke rimskog područja u Galiji; pobjeđuje <b>Alamane</b>, povezuje se s Burgundima, potiskuje <b>Vizigote</b>.</li>
+        <li>Prelazi na <b>pravovjerno kršćanstvo</b> (496./499.) → potpora Crkve i biskupa.</li>
+        <li>Car <b>Anastazije I.</b> daje mu naslov počasnog konzula → vlast priznata i u očima Galorimljana.</li>
+        <li>Prijestolnica: <b>Pariz</b>. Pri njegovoj smrti Franačka seže od Pirineja i Atlantika do Rajne.</li>
+        <li>Država se dijeli među četiri sina, ali ostaje cjelovita. Nasljednici pripajaju Burgundiju, Provansu, južnu Tiringiju → <b>najmoćnija država na tlu Zapadnog Rimskog Carstva</b>.</li>
+      </ul>
+      <h3>Merovinzi i majordomi</h3>
+      <ul>
+        <li>Kralj je izvor zakona, vrhovni sudac i zapovjednik vojske. Za Franke i Galorimljane vrijedi isti <b>Salijski zakon</b>.</li>
+        <li><b>Majordom</b> = predstojnik kraljevske palače; od sredine 7. st. stvarno upravlja državom.</li>
+        <li>Na mjesnoj razini vladaju <b>grofovi</b> (sude, skupljaju porez), iznad njih <b>vojvode</b>.</li>
+      </ul>
+      <h3>Karlo Martel i Pipin Mali</h3>
+      <ul>
+        <li><b>Karlo Martel</b> (majordom, 714.–741.) dijeli zemlju za <b>konjaničku službu</b>; <b>732.</b> pobjeđuje <b>Arape</b> kod <b>Poitiersa</b>.</li>
+        <li><b>Pipin Mali</b> <b>751.</b> uklanja Merovinge i postaje kralj → <b>Karolinzi</b>. Područje oduzeto Langobardima daje papi → <b>Papinska Država</b>. Uvodi <b>desetinu</b>.</li>
+      </ul>
+      <h3>Karlo Veliki (768.–814.)</h3>
+      <ul>
+        <li>Pokorio <b>Langobarde</b>, <b>Sase</b> (pokršteni nakon 20+ godina rata), pripojio <b>Bavarsku</b>, srušio državu <b>Avara</b>.</li>
+        <li>Na granicama osniva <b>marke</b> (na čelu <b>markgrof</b>).</li>
+        <li><b>Božić 800.</b> – papa <b>Lav III.</b> kruni ga u Rimu za <b>rimskog cara</b> → rat s Bizantom.</li>
+        <li><b>812. mir u Aachenu</b>: Bizant priznaje Karlu carski naslov. Istra i zaleđe → Franci; dalmatinski gradovi, otoci i Venecija → Bizant.</li>
+      </ul>
+      <h3>Raspad – ugovor u Verdunu 843.</h3>
+      <div class="tablewrap"><table>
+        <tr><th>Tko</th><th>Što dobiva</th></tr>
+        <tr><td><b>Karlo Ćelavi</b></td><td>Zapadnu Franačku (današnja Francuska)</td></tr>
+        <tr><td><b>Ludovik Njemački</b></td><td>Istočnu Franačku (istočno od Rajne)</td></tr>
+        <tr><td><b>Lotar</b></td><td>Središnju Franačku (Italija, Burgundija, Lotaringija) i carski naslov</td></tr>
+      </table></div>
+      <div class="key">Podjela iz Verduna postala je <strong>temelj kasnijih europskih država</strong>.</div>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="franci">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="bizant">
+    <summary><span class="num">3</span><span class="t">Bizantsko Carstvo</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <p><b>Bizant</b> = povjesničarski naziv za nastavak <b>Istočnog Rimskog Carstva</b>. Središte: <b>Konstantinopol</b> (osnovan <b>330.</b>). Bizantinci sebe zovu <b>Romeji</b> („Rimljani”).</p>
+      <h3>Justinijan I. (527.–565.)</h3>
+      <ul>
+        <li>Pobjeđuje <b>Vandale</b> (533.–534.) i <b>Ostrogote</b>, uzima dio Hispanije – Sredozemlje opet pod Carstvom.</li>
+        <li>Zakonska zbirka <b>Corpus iuris civilis</b> (Zbornik građanskog prava).</li>
+        <li>Crkva <b>Aja Sofija</b> (sv. Mudrost); <b>529.</b> zatvara pogansku školu u Ateni. Supruga carica <b>Teodora</b>.</li>
+      </ul>
+      <h3>Heraklije I. (610.–641.)</h3>
+      <ul>
+        <li>Nakon Justinijana: Langobardi uzimaju Italiju, Perzijanci Siriju i Egipat, <b>Avari</b> 582. Sirmij.</li>
+        <li><b>626.</b> Avari, Slaveni i Perzijanci opsjedaju Konstantinopol – <b>neuspješno</b>.</li>
+        <li><b>Helenizacija</b>: službeni jezik postaje <b>grčki</b>.</li>
+        <li><b>Teme</b> – vojne oblasti; zapovjednik ima vojnu i civilnu vlast; vojnici dobivaju zemlju za vojnu službu i porez.</li>
+      </ul>
+      <h3>Arapi, Bugari, dinastije</h3>
+      <ul>
+        <li>Arapske opsade <b>674.–678.</b> i <b>717.–718.</b> odbijene <b>grčkom vatrom</b> (gori i na vodi). <b>Lav III.</b> – savez s Bugarima i Hazarima.</li>
+        <li><b>Bazilije I.</b> osniva <b>makedonsku dinastiju</b> (867.–1057.) – vrhunac moći, širenje kršćanstva među Slavenima.</li>
+        <li>Bugarski car <b>Simeon</b> (893.–927.) – 924. opsjeda Konstantinopol, bez uspjeha.</li>
+        <li><b>Bazilije II.</b> pobjeđuje <b>Samuila</b> kod <b>Belasice 1014.</b> (oslijepljeno ~15 000 vojnika) → nadimak <b>Bugaroubojica</b>; 1018. osvaja ostatke države.</li>
+      </ul>
+      <h3>Kriza 11. stoljeća</h3>
+      <ul>
+        <li>Propada tematski sustav, plaćenici, kvarenje novca.</li>
+        <li><b>1071.</b> <b>Manzikert</b> – Turci Seldžuci zarobljavaju cara Romana IV. Diogena; Normani osvajaju Bari.</li>
+        <li><b>Aleksije I. Komnen</b> (1081.–1118.) – novčana reforma, odbija Normane i Pečenege, traži pomoć Zapada.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="bizant">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="hrvati">
+    <summary><span class="num">4</span><span class="t">Podrijetlo i doseljenje Hrvata</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <p>Podrijetlo Hrvata je <b>još otvoreno pitanje</b>.</p>
+      <div class="tablewrap"><table>
+        <tr><th>Teorija</th><th>Što tvrdi</th><th>Oslonac</th></tr>
+        <tr><td><b>Slavenska</b> (najstarija)</td><td>Hrvati su Slaveni, došli s ostalima u jednom valu</td><td>–</td></tr>
+        <tr><td><b>Društveni dualizam</b></td><td>Hrvati – vladajući sloj nad pokorenim Slavenima</td><td>–</td></tr>
+        <tr><td><b>Gotska</b></td><td>Hrvati su poslavenjeni Goti</td><td>Toma Arhiđakon (13. st.)</td></tr>
+        <tr><td><b>Iranska</b></td><td>Iransko pleme koje se poslavenilo</td><td><b>Tanajske ploče</b> (Horoathos)</td></tr>
+        <tr><td><b>Avarska</b></td><td>„Hrvati” = sloj avarskih graničara</td><td>–</td></tr>
+      </table></div>
+      <div class="key"><strong>Danas prihvaćeno:</strong> Hrvati su slavenskog podrijetla ili su došli već poslavenjeni.</div>
+      <h3>Doseljenje</h3>
+      <ul>
+        <li>Izvor: <b>Konstantin VII. Porfirogenet</b>, djelo <b><i>O upravljanju Carstvom</i></b> – Hrvati su na poziv cara <b>Heraklija</b> došli pod vodstvom <b>petorice braće i dviju sestara</b>. Heraklijeva uloga danas se odbacuje.</li>
+        <li>Doseljenje <b>tijekom 7. stoljeća</b>, u više skupina; vjerojatno između <b>Zrmanje i Cetine</b>.</li>
+        <li>Romanski gradovi: <b>Jadera</b> (Zadar), <b>Tragurij</b> (Trogir), otoci <b>Kurikta</b> (Krk), <b>Apsor</b> (Osor), <b>Arba</b> (Rab).</li>
+        <li>Izbjeglice iz <b>Salone</b> → Dioklecijanova palača (<b>Split</b>); iz Epidaura → <b>Ragusium</b> (Dubrovnik).</li>
+        <li><b>641.</b> opat <b>Martin</b> otkupljuje zarobljene kršćane. Pokrštavanje iz Rima, Akvileje i Bizanta.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="hrvati">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="knez">
+    <summary><span class="num">5</span><span class="t">Prve kneževine (sklavinije)</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <p><b>Sklavinija</b> = manja politička zajednica Slavena. Na čelu <b>knez</b>; dijeli se na <b>županije</b> kojima upravlja <b>župan</b>.</p>
+      <div class="tablewrap"><table>
+        <tr><th>Sklavinija</th><th>Gdje</th></tr>
+        <tr><td><b>Hrvatska</b> (Dalmatinska kneževina)</td><td>između Zrmanje i Cetine; u 9. st. do Raše, Kupe i Vrbasa</td></tr>
+        <tr><td><b>Paganija</b> (Neretvanska kneževina)</td><td>od Cetine do Neretve; dugo nekršteni „pogani”</td></tr>
+        <tr><td><b>Hum</b> i <b>Travunja</b></td><td>južno od Neretve</td></tr>
+        <tr><td><b>Bosna</b></td><td>gornji tok rijeke Bosne (spominje se u 10. st.)</td></tr>
+        <tr><td><b>Donjopanonska kneževina</b></td><td>između Save i Drave, središte <b>Sisak</b></td></tr>
+      </table></div>
+      <div class="key">Nazivi „Primorska Hrvatska” i „Posavska Hrvatska” <strong>nisu postojali</strong> – izmislili su ih moderni povjesničari.</div>
+      <h3>Borna i Ljudevit</h3>
+      <ul>
+        <li><b>Borna</b> – knez Dalmatinske kneževine od <b>819.</b>, franački saveznik; misionari iz Akvileje.</li>
+        <li><b>Ljudevit</b> – knez Donjopanonske kneževine, <b>ustanak 819.–822.</b> protiv Franaka; ubijen 823.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="knez">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="st9">
+    <summary><span class="num">6</span><span class="t">Jačanje Hrvatske u 9. stoljeću</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <p>Glavni suparnik na moru: <b>Venecija</b> (Mlečani).</p>
+      <div class="tablewrap"><table>
+        <tr><th>Vladar</th><th>Zapamti</th></tr>
+        <tr><td><b>Mislav</b></td><td>s Družakom protiv Venecije; mir 839.</td></tr>
+        <tr><td><b>Trpimir</b></td><td><b>darovnica 852.</b> – „knez Hrvata” (prvi put hrvatsko ime u naslovu); osnivač <b>Trpimirovića</b>; samostan u <b>Rižinicama</b>; Gottschalk; biskupija u Ninu</td></tr>
+        <tr><td><b>Domagoj</b></td><td>Bari 871.; Mlečani ga zovu „najgori knez Slavena”</td></tr>
+        <tr><td><b>Zdeslav</b></td><td>doveo ga Bazilije I.; brzo svrgnut</td></tr>
+        <tr><td><b>Branimir</b></td><td><b>879.</b> papa <b>Ivan VIII.</b> ga blagoslivlja → prvo međunarodno priznanje; natpis iz <b>Šopota</b> – najstariji kameni zapis hrvatskog imena; <b>887.</b> kod Makarske pogiba mletački dužd</td></tr>
+        <tr><td><b>Muncimir</b></td><td>povratak Trpimirovića; sjedište Bijaći</td></tr>
+      </table></div>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="st9">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="tomislav">
+    <summary><span class="num">7</span><span class="t">Tomislav – prvi hrvatski kralj</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <ul>
+        <li>Vlada u <b>prvoj četvrtini 10. st.</b>; boj s <b>Mađarima</b>, vlast do Siska.</li>
+        <li>Bizantski saveznik – porazio vojsku bugarskog cara <b>Simeona</b> (vojskovođa Alogobotur).</li>
+        <li>Porfirogenet: 60 000 konjanika, 100 000 pješaka, 80 lađa (preuveličano).</li>
+        <li>Papa <b>Ivan X.</b> u pismu <b>925.</b> naziva ga <b>kraljem</b>.</li>
+      </ul>
+      <h3>Splitski crkveni sabori</h3>
+      <ul>
+        <li>Tko je glavni? <b>Splitski nadbiskup</b> (nasljednik Salone), zadarski biskup (sjedište bizantske Dalmacije) ili <b>ninski biskup Grgur</b> (najveća biskupija).</li>
+        <li><b>925.</b> – pobjeđuje Split. <b>928.</b> – <b>ukinuta ninska biskupija</b>.</li>
+        <li>Glagoljaši ne smiju biti zaređeni bez znanja latinskog, ali bogoslužje na slavenskom ostaje.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="tomislav">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="kresimir">
+    <summary><span class="num">8</span><span class="t">Od Tomislava do Petra Krešimira IV.</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <ul>
+        <li><b>Pribina</b> – prvi poimence poznati <b>ban</b>; zbacio kralja Miroslava.</li>
+        <li>Kraljica <b>Jelena</b> – crkva sv. Marije na Otoku kraj Solina (grobnica kraljeva).</li>
+        <li><b>Stjepan Držislav</b> – kruna od Bazilija II. → prvi okrunjeni kralj; „Stjepan” = okrunjen.</li>
+        <li>Sinovi Svetoslav <b>Suronja</b>, Krešimir III., Gojslav – sukobi; oko <b>1000.</b> Venecija zavladava dalmatinskim gradovima.</li>
+      </ul>
+      <h3>Petar Krešimir IV. (oko 1059.–1075.) – vrhunac</h3>
+      <ul>
+        <li>Razvija <b>Nin, Biograd i Šibenik</b>; prijestolnica <b>Biograd</b>.</li>
+        <li>Naslov <b>„kralj Hrvatske i Dalmacije”</b>; Jadran – „<b>naše dalmatinsko more</b>”.</li>
+        <li>Darovnica za otok <b>Maun 1069.</b>: kraljevstvo prošireno „<b>na kopnu i na moru</b>”.</li>
+        <li>Banovi: <b>Dmitar Zvonimir</b> (Slavonija), <b>Gojko</b> (Lika, Gacka, Krbava).</li>
+        <li>Sabor u Splitu <b>1060.</b> zabranjuje glagoljicu, svećenici se ne smiju ženiti; uporište glagoljaša <b>Krk i Cres</b>; <b>1064.</b> reforma potvrđena, ali slavensko bogoslužje se održalo.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="kresimir">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+
+  <details class="ch" data-id="zvonimir">
+    <summary><span class="num">9</span><span class="t">Dmitar Zvonimir i kraj Trpimirovića</span><span class="arrow">▸</span></summary>
+    <div class="ch-body">
+      <ul>
+        <li><b>1075.</b> Normani zarobljavaju kralja (vjerojatno Petra Krešimira IV.).</li>
+        <li>Supruga: <b>Jelena (Ilona) Arpadović</b>, ugarska princeza.</li>
+        <li><b>1076.</b> papin poslanik <b>Gebizon</b> kruni ga u crkvi <b>sv. Petra i Mojsija u Solinu</b> (papa <b>Grgur VII.</b>).</li>
+        <li><b>Papin vazal</b>: prisega vjernosti, samostan <b>sv. Grgura u Vrani</b>, danak <b>200 dukata</b> godišnje → zauzvrat papina zaštita.</li>
+        <li>Stoluje u <b>Kninu</b>; podupire glagoljaše → <b>Bašćanska ploča</b> (Krk).</li>
+        <li><b>1081.</b> s Normanima napada <b>Drač</b> (protiv Bizanta).</li>
+        <li>Umire <b>1089.</b> – legenda o ubojstvu na Kosovu polju kraj Knina i prokletstvu.</li>
+        <li><b>Stjepan III.</b> – posljednji Trpimirović (umire oko <b>1091.</b>) → dolaze <b>Arpadovići</b>.</li>
+      </ul>
+      <div class="ch-actions"><label class="learned"><input type="checkbox"> Naučeno</label><button class="link" data-goto="zvonimir">Provjeri se kvizom →</button></div>
+    </div>
+  </details>
+</section>
+
+<!-- ===================== KARTICE ===================== -->
+<section id="tab-kartice" class="tab hidden">
+  <div class="row">
+    <select id="fcTopic" aria-label="Tema kartica"></select>
+    <button class="btn ghost" id="fcRestart">Promiješaj</button>
+  </div>
+  <p class="small muted" id="fcInfo"></p>
+  <div class="flash" id="flash" tabindex="0" role="button" aria-label="Okreni karticu">
+    <div class="flash-inner">
+      <div class="face front"><span class="topic" id="fcTopicName"></span><div class="q" id="fcQ"></div><div class="tip">Klikni za odgovor</div></div>
+      <div class="face back"><div class="a" id="fcA"></div><div id="fcE"></div></div>
+    </div>
+  </div>
+  <div class="row" id="fcBtns">
+    <button class="btn bad" id="fcNo">Ne znam</button>
+    <button class="btn good" id="fcYes">Znam</button>
+  </div>
+  <div class="card hidden" id="fcDone">
+    <p style="margin:0 0 12px;font-weight:600">Sve kartice iz ove teme su gotove!</p>
+    <button class="btn" id="fcAgain">Kreni ispočetka</button>
+  </div>
+  <p class="hint">Razmaknica = okreni · ← ne znam · → znam</p>
+</section>
+
+<!-- ===================== KRONOLOGIJA ===================== -->
+<section id="tab-kronologija" class="tab hidden">
+  <div class="card" style="margin-bottom:14px">
+    <p style="margin:0 0 10px" class="small muted">Sakrij jedan stupac i provjeri se. Klik na zamućeno polje otkriva ga.</p>
+    <div class="chips">
+      <button class="chip" id="tlShowAll" aria-pressed="true">Prikaži sve</button>
+      <button class="chip" id="tlHideEv" aria-pressed="false">Sakrij događaje</button>
+      <button class="chip" id="tlHideY" aria-pressed="false">Sakrij godine</button>
+    </div>
+  </div>
+  <ul class="tl" id="tl"></ul>
+  <p class="small muted">Narančasto = hrvatska povijest.</p>
+</section>
+
+<!-- ===================== KVIZ ===================== -->
+<section id="tab-kviz" class="tab hidden">
+  <div id="qzStart">
+    <div class="card">
+      <h2 style="margin-top:0">1. Odaberi teme</h2>
+      <div class="chips" id="topics"></div>
+      <p style="margin:10px 0 0"><button class="link" id="allTopics">Odaberi sve</button></p>
+      <h2>2. Koliko pitanja?</h2>
+      <div class="chips" id="counts"></div>
+      <div class="row" style="margin-top:22px">
+        <button class="btn" id="go">Kreni</button>
+        <span id="avail" class="small muted"></span>
+      </div>
+      <div class="small muted" id="best" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <div id="qzRun" class="hidden">
+    <div class="top">
+      <span id="pos"></span><span id="live"></span>
+      <button class="link" id="quit">Prekini</button>
+    </div>
+    <div class="bar qbar"><i id="barFill"></i></div>
+    <div class="card">
+      <span class="topic" id="qTopic"></span>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb"></div>
+      <div class="next"><button class="btn hidden" id="next">Dalje</button></div>
+      <div class="hint">Tipke 1–4 za odgovor, Enter za dalje</div>
+    </div>
+  </div>
+
+  <div id="qzResult" class="hidden">
+    <div class="card">
+      <p class="score" id="scorePct"></p>
+      <p id="scoreText" style="margin:4px 0 0"></p>
+      <p id="scoreMsg" class="muted" style="margin:6px 0 0"></p>
+      <div class="row" style="margin-top:20px">
+        <button class="btn" id="retryWrong">Ponovi pogrešne</button>
+        <button class="btn ghost" id="again">Novi kviz</button>
+      </div>
+    </div>
+    <div id="wrongWrap">
+      <h2>Pogrešni odgovori</h2>
+      <ul class="wrong" id="wrongList"></ul>
+    </div>
+  </div>
+</section>
+
+<footer>Pitanja i gradivo prema udžbeniku · napredak se pamti na ovom uređaju</footer>
+</main>
+
+<script>
+const TOPICS = [
+  { id: "seoba",    name: "Seoba naroda" },
+  { id: "franci",   name: "Franci" },
+  { id: "bizant",   name: "Bizant" },
+  { id: "hrvati",   name: "Podrijetlo Hrvata" },
+  { id: "knez",     name: "Prve kneževine" },
+  { id: "st9",      name: "Hrvatska u 9. st." },
+  { id: "tomislav", name: "Tomislav" },
+  { id: "kresimir", name: "Do Petra Krešimira IV." },
+  { id: "zvonimir", name: "Zvonimir" }
+];
+
+// Kronologija: [godina, događaj, hrvatska povijest?]
+const TIMELINE = [
+  ["291.", "prvi spomen Franaka u rimskim izvorima"],
+  ["330.", "osnutak Konstantinopola"],
+  ["375.", "Huni napadaju Gote – početak seobe naroda"],
+  ["410.", "Goti osvajaju Rim"],
+  ["451.", "Rimljani i Franci protiv Atile (Katalaunska polja)"],
+  ["455.", "Vandali pljačkaju Rim"],
+  ["486.", "Klodvig osvaja ostatke rimskog područja u Galiji"],
+  ["489.–493.", "Ostrogoti osnivaju državu u Italiji"],
+  ["511.", "smrt Klodviga I."],
+  ["527.–565.", "Justinijan I."],
+  ["529.", "zatvorena poganska škola u Ateni"],
+  ["568.", "Langobardi odlaze u Italiju – kraj seobe naroda"],
+  ["610.–641.", "Heraklije I."],
+  ["626.", "neuspjela opsada Konstantinopola (Avari, Slaveni, Perzijanci)"],
+  ["7. st.", "doseljenje Hrvata", 1],
+  ["641.", "misija opata Martina", 1],
+  ["674.–678.", "arapska opsada Konstantinopola, grčka vatra"],
+  ["717.–718.", "posljednja arapska opsada Konstantinopola"],
+  ["732.", "Karlo Martel pobjeđuje Arape kod Poitiersa"],
+  ["751.", "Pipin Mali kralj – početak Karolinga"],
+  ["768.–814.", "Karlo Veliki"],
+  ["800.", "Karlo Veliki okrunjen za cara (Božić, Rim)"],
+  ["812.", "mir u Aachenu"],
+  ["819.–822.", "Borna knez; ustanak Ljudevita", 1],
+  ["843.", "ugovor u Verdunu – dioba Franačke"],
+  ["852.", "Trpimirova darovnica", 1],
+  ["867.", "početak makedonske dinastije (Bazilije I.)"],
+  ["879.", "papa Ivan VIII. blagoslivlja Branimira", 1],
+  ["887.", "bitka kod Makarske – pogiba mletački dužd", 1],
+  ["925.", "papa Ivan X. naziva Tomislava kraljem; 1. splitski sabor", 1],
+  ["928.", "2. splitski sabor – ukinuta ninska biskupija", 1],
+  ["oko 1000.", "Venecija zavladava dalmatinskim gradovima", 1],
+  ["1014.", "bitka kod Belasice (Bazilije II. – Samuilo)"],
+  ["1060.", "splitski sabor zabranjuje glagoljicu", 1],
+  ["1069.", "darovnica Petra Krešimira IV. za otok Maun", 1],
+  ["1071.", "Manzikert; Normani osvajaju Bari"],
+  ["1075.", "Normani zarobljavaju hrvatskog kralja", 1],
+  ["1076.", "krunidba Zvonimira u Solinu", 1],
+  ["1081.", "Zvonimir i Normani napadaju Drač", 1],
+  ["1089.", "smrt Zvonimira", 1],
+  ["oko 1091.", "smrt Stjepana III. – kraj Trpimirovića", 1]
+];
+
+// Pitanja: o[0] je TOČAN odgovor (kviz ih miješa)
+const Q = [
+  { t:"seoba", q:"Koji su nomadski konjanici 375. napali Gote i tako potaknuli seobu naroda?", o:["Huni","Avari","Vandali","Langobardi"], e:"Huni su došli iz srednje Azije; njihov napad na Gote uzima se kao početak seobe." },
+  { t:"seoba", q:"Koji se događaj uzima kao KRAJ velike seobe naroda?", o:["Odlazak Langobarda u Italiju 568.","Osvajanje Rima 410.","Smrt Atile","Pljačka Rima 455."], e:"Langobardi su 568. iz Panonije krenuli u Italiju." },
+  { t:"seoba", q:"Koje su godine Goti osvojili grad Rim?", o:["410.","455.","375.","568."], e:"Vojska sastavljena uglavnom od Gota osvojila je Rim 410." },
+  { t:"seoba", q:"Tko je 455. napao i opljačkao Rim?", o:["Vandali","Vizigoti","Huni","Franci"], e:"Vandali su napali Rim iz sjeverne Afrike." },
+  { t:"seoba", q:"Gdje je bilo središte vandalskog kraljevstva?", o:["U Kartagi (sjeverna Afrika)","U Raveni","U Sirmiju","U Parizu"], e:"Vandali su zavladali zapadnim Sredozemljem." },
+  { t:"seoba", q:"Kako se još nazivaju Zapadni Goti?", o:["Vizigoti","Ostrogoti","Gepidi","Alamani"], e:"Vizigoti = Zapadni Goti, Ostrogoti = Istočni Goti." },
+  { t:"seoba", q:"Koji je najpoznatiji hunski vladar?", o:["Atila","Klodvig","Simeon","Samuilo"], e:"Nakon Atiline smrti sredinom 5. st. Huni gube važnu ulogu." },
+  { t:"seoba", q:"Je li velika seoba naroda bila glavni uzrok pada Zapadnog Rimskog Carstva?", o:["Ne – presudile su unutarnje slabosti Carstva","Da – barbari su htjeli srušiti Carstvo","Da – Huni su osvojili Rim","Ne – Carstvo je palo zbog kuge"], e:"Doseljene skupine htjele su se uklopiti u rimski sustav, a ne ga srušiti." },
+  { t:"seoba", q:"Zašto je naziv „velika seoba naroda” sporan?", o:["Tada nisu postojali narodi u današnjem smislu","Seoba se nije dogodila","Selili su se samo Rimljani","Trajala je samo jednu godinu"], e:"Skupine su bile mješovite, vezane ciljevima i vođom, često samo vojnički odredi." },
+  { t:"seoba", q:"Gdje su Vizigoti stvorili svoje kraljevstvo?", o:["U južnoj Galiji i Hispaniji","U Italiji","U sjevernoj Africi","U Panoniji"], e:"Nakon osvajanja Rima prešli su u Galiju, a do kraja 5. st. zavladali i dijelom Hispanije." },
+  { t:"seoba", q:"Tko je početkom 6. stoljeća bio najveća sila na ruševinama Zapadnog Rimskog Carstva?", o:["Ostrogoti","Vandali","Huni","Avari"], e:"Ostrogoti su po dogovoru s istočnorimskim carem prešli u Italiju." },
+  { t:"seoba", q:"Kada su Ostrogoti utemeljili državu u Italiji?", o:["489.–493.","410.","568.","626."], e:"Vlast su proširili i na Dalmaciju i južnu Panoniju." },
+  { t:"seoba", q:"Gdje je bilo središte kraljevstva Gepida?", o:["U Sirmiju (Sremska Mitrovica)","U Sisku","U Saloni","U Kartagi"], e:"Gepidi su bili nasljednici hunske moći u srednjem Podunavlju." },
+  { t:"seoba", q:"S kim su Langobardi bili u savezu kada su pobijedili Gepide?", o:["S Avarima","S Hunima","S Francima","S Ostrogotima"], e:"Godinu dana nakon pobjede Langobardi su otišli u Italiju." },
+  { t:"seoba", q:"Tko je postao gospodar srednjeg Podunavlja nakon odlaska Langobarda u Italiju?", o:["Avari","Gepidi","Franci","Ostrogoti"], e:"Avari, nomadski konjanici iz srednje Azije, postali su još veći izazov Istočnom Rimskom Carstvu." },
+
+  { t:"franci", q:"Kada se Franci prvi put spominju u rimskim izvorima?", o:["Potkraj 3. stoljeća (291.)","Godine 375.","Godine 486.","Početkom 7. stoljeća"], e:"Bile su to skupine uz Rajnu koje su gusarile Sjevernim morem." },
+  { t:"franci", q:"Koji je rimski vojskovođa Francima doznačio područje između rijeka Somme i Schelde?", o:["Aecije","Atila","Odoakar","Justinijan"], e:"Aecije je bio glavni rimski vojskovođa na Zapadu sredinom 5. st." },
+  { t:"franci", q:"Na čijoj su se strani Franci 451. borili protiv Atile (Katalaunska polja)?", o:["Na strani Rimljana","Na strani Huna","Na strani Vandala","Bili su neutralni"], e:"Franci su se borili uz Rimljane protiv hunskog kralja Atile." },
+  { t:"franci", q:"Što danas povjesničari misle o podjeli na Salijske i Ripuarske Franke?", o:["Ne odgovara stvarnosti – franačkih skupina bilo je mnogo","To su bila dva odvojena carstva","Salijski Franci živjeli su u Italiji","Ripuarski Franci bili su Huni"], e:"Bilo je onoliko skupina koliko i vladara; ime Ripuarski zabilježeno je tek u 7. st." },
+  { t:"franci", q:"Tko je utemeljitelj franačke moći i države?", o:["Klodvig I.","Karlo Veliki","Pipin Mali","Karlo Martel"], e:"Klodvig I. (o. 481.–511.) zavladao je svim franačkim skupinama." },
+  { t:"franci", q:"Kako se zove vladarski rod kojem je pripadao Klodvig?", o:["Merovinzi","Karolinzi","Arpadovići","Trpimirovići"], e:"Merovinzi su prva franačka dinastija." },
+  { t:"franci", q:"Koji je grad Klodvig odabrao za prijestolnicu?", o:["Pariz","Aachen","Tournai","Köln"], e:"Pariz je ležao otprilike u sredini proširene franačke države." },
+  { t:"franci", q:"Što je Klodvigu donijelo moćnu potporu Crkve i biskupa u Galiji?", o:["Prelazak na pravovjerno kršćanstvo","Savez s Hunima","Osvajanje Rima","Krunidba u Aachenu"], e:"Klodvig je primio pravovjerno kršćanstvo (496./499.)." },
+  { t:"franci", q:"Koji je car Klodviga okitio naslovom počasnog konzula?", o:["Anastazije I.","Justinijan I.","Heraklije I.","Bazilije I."], e:"Time je Klodvigova vlast ozakonjena u očima rimskog stanovništva Galije." },
+  { t:"franci", q:"Koga je Klodvig porazio i potisnuo prema Pirinejskom poluotoku?", o:["Vizigote","Ostrogote","Langobarde","Avare"], e:"Klodvig je potukao i Alamane te se povezao s Burgundima." },
+  { t:"franci", q:"Do kuda je sezala Franačka u času Klodvigove smrti (511.)?", o:["Od Pirineja i Atlantskog oceana do Rajne","Od Rajne do Dunava","Od Rima do Pariza","Samo do rijeke Seine"], e:"Naslijedila su ga četiri sina, ali je država ostala cjelovita." },
+  { t:"franci", q:"Što je bio majordom?", o:["Predstojnik kraljevske palače","Papin poslanik","Zapovjednik granične marke","Gradski biskup"], e:"Od sredine 7. st. majordomi su umjesto kraljeva upravljali državom." },
+  { t:"franci", q:"Koji je zakon vrijedio jednako za Franke i Galorimljane?", o:["Salijski zakon","Corpus iuris civilis","Zakon dvanaest ploča","Vinodolski zakon"], e:"U Salijskom zakonu popisano je franačko običajno pravo." },
+  { t:"franci", q:"Tko je 732. pobijedio Arape kod Poitiersa?", o:["Karlo Martel","Karlo Veliki","Klodvig I.","Pipin Mali"], e:"Majordom Karlo Martel suprotstavio se Arapima koji su provaljivali na franačko područje." },
+  { t:"franci", q:"Kako je Karlo Martel osigurao konjičku vojsku?", o:["Dijelio je zemlju u zamjenu za vojnu službu","Unajmio je hunske plaćenike","Uveo je desetinu","Kupio je konje od Bizanta"], e:"Zemlju oduzetu Crkvi i velikašima dao je ljudima koji su mu služili kao konjanici." },
+  { t:"franci", q:"Što je Pipin Mali učinio 751.?", o:["Uklonio Merovinge i proglasio se kraljem","Okrunio se za cara","Podijelio Franačku u Verdunu","Pokrstio Sase"], e:"Uz papinu privolu nastala je nova dinastija – Karolinzi." },
+  { t:"franci", q:"Pipinov dar papi (područje oduzeto Langobardima) postao je temelj čega?", o:["Papinske Države","Svetog Rimskog Carstva","Venecije","Lotaringije"], e:"Pipin je pobijedio Langobarde koji su ugrožavali Rim." },
+  { t:"franci", q:"Kada i gdje je Karlo Veliki okrunjen za rimskog cara?", o:["Na Božić 800. u Rimu","812. u Aachenu","843. u Verdunu","751. u Parizu"], e:"Krunidba u crkvi sv. Petra bila je vrhunac njegove vladavine." },
+  { t:"franci", q:"Koji je papa okrunio Karla Velikog?", o:["Lav III.","Ivan VIII.","Grgur VII.","Ivan X."], e:"Papa Lav III., 800. godine." },
+  { t:"franci", q:"Što je odlučeno mirom u Aachenu 812.?", o:["Bizant priznaje Karlu carski naslov; dalmatinski gradovi ostaju Bizantu","Franačka se dijeli na tri dijela","Hrvati dobivaju kralja","Venecija pripada Francima"], e:"Istra i istočnojadransko zaleđe pripali su Francima, a gradovi, otoci i Venecija Bizantu." },
+  { t:"franci", q:"Kako su se zvale granične oblasti koje je osnivao Karlo Veliki?", o:["Marke","Teme","Sklavinije","Župe"], e:"Na čelu marke bio je markgrof, a marke su štitile franačke granice." },
+  { t:"franci", q:"Koje je godine ugovorom u Verdunu podijeljena Franačka?", o:["843.","800.","812.","768."], e:"Karlovi unuci podijelili su Franačku na tri dijela." },
+  { t:"franci", q:"Tko je u Verdunu dobio Zapadnu Franačku (današnju Francusku)?", o:["Karlo Ćelavi","Ludovik Njemački","Lotar","Ludovik Pobožni"], e:"Ludovik Njemački dobio je Istočnu, a Lotar Središnju Franačku s carskim naslovom." },
+
+  { t:"bizant", q:"Kako su Bizantinci nazivali sami sebe?", o:["Romeji (Rimljani)","Heleni","Bizantinci","Latini"], e:"Svoju državnost izvodili su iz Rimskog Carstva." },
+  { t:"bizant", q:"Kada je osnovan Konstantinopol?", o:["330.","425.","527.","626."], e:"Konstantinopol je bio središte Istočnog Rimskog Carstva i Bizanta." },
+  { t:"bizant", q:"Koji je car dao sabrati rimsko pravo (Corpus iuris civilis)?", o:["Justinijan I.","Heraklije I.","Bazilije II.","Lav III."], e:"Justinijan I. (527.–565.) – posljednji uzlet kasnoantičkog Carstva." },
+  { t:"bizant", q:"Koja je crkva sagrađena za Justinijana u Konstantinopolu?", o:["Aja Sofija (sv. Mudrost)","San Vitale","Sv. Petar","Sv. Marija na Otoku"], e:"Hagia Sofia je danas muzej Aja Sofija." },
+  { t:"bizant", q:"Kako se zvala Justinijanova supruga?", o:["Teodora","Jelena","Ilona","Anastazija"], e:"Carica Teodora prikazana je na mozaiku u crkvi San Vitale u Raveni." },
+  { t:"bizant", q:"Koji je jezik za Heraklija postao službeni jezik Carstva?", o:["Grčki","Latinski","Slavenski","Arapski"], e:"Provedena je helenizacija – latinski je izbačen iz upotrebe." },
+  { t:"bizant", q:"Što su bile teme (temata)?", o:["Vojne oblasti s vojnim zapovjednikom koji ima i civilnu vlast","Crkvene pokrajine","Trgovačke kolonije","Carske palače"], e:"Vojnici su dobivali zemlju za vojnu službu i plaćanje poreza." },
+  { t:"bizant", q:"Tko je 626. opsjedao Konstantinopol?", o:["Avari i Slaveni, uz Perzijance","Arapi","Bugari pod Simeonom","Turci Seldžuci"], e:"Opsada je propala zahvaljujući zidinama i mornarici." },
+  { t:"bizant", q:"Što je bila grčka vatra?", o:["Zapaljiva masa koja gori i na vodi","Bizantski zlatnik","Vrsta mozaika","Signalna vatra na zidinama"], e:"Njome su odbijene arapske opsade Konstantinopola." },
+  { t:"bizant", q:"S kojim je narodima Lav III. sklopio savez protiv Arapa?", o:["S Bugarima i Hazarima","S Francima i Langobardima","S Avarima i Slavenima","S Normanima"], e:"Arapi su 717.–718. posljednji put opsjedali Konstantinopol." },
+  { t:"bizant", q:"Tko je utemeljio makedonsku dinastiju (867.)?", o:["Bazilije I.","Bazilije II.","Heraklije I.","Aleksije I. Komnen"], e:"Pod makedonskom dinastijom Bizant je doživio vrhunac moći." },
+  { t:"bizant", q:"Koji je bugarski vladar uzeo carski naslov i 924. opsjeo Konstantinopol?", o:["Simeon","Samuilo","Boris","Alogobotur"], e:"Simeon (893.–927.) nije uspio osvojiti Konstantinopol." },
+  { t:"bizant", q:"Tko je pobijedio u bitki kod Belasice 1014.?", o:["Bazilije II. (nad Samuilom)","Samuilo (nad Bazilijem II.)","Simeon (nad Bizantom)","Tomislav (nad Bugarima)"], e:"Oslijepljeno je oko 15 000 zarobljenika, a Samuilo je umro iste godine." },
+  { t:"bizant", q:"Koji je nadimak dobio Bazilije II.?", o:["Bugaroubojica","Pobožni","Veliki","Ćelavi"], e:"Zbog pobjede nad Samuilovom državom." },
+  { t:"bizant", q:"Što se dogodilo 1071. kod Manzikerta?", o:["Turci Seldžuci porazili su i zarobili cara Romana IV. Diogena","Normani su osvojili Bari","Arapi su zauzeli Siciliju","Bizant je pobijedio Pečenege"], e:"Seldžuci su zavladali glavninom Male Azije." },
+  { t:"bizant", q:"Kojom je dinastijom započeo Aleksije I. (1081.–1118.)?", o:["Komnena","Makedonskom","Sirijskom","Amorijskom"], e:"Proveo je novčanu reformu i od Zapada tražio pomoć protiv Seldžuka." },
+
+  { t:"hrvati", q:"Tko je napisao djelo „O upravljanju Carstvom”?", o:["Konstantin VII. Porfirogenet","Toma Arhiđakon","Einhard","Ivan Skilica"], e:"Bizantski car (913.–959.) – glavni izvor o doseljenju Hrvata." },
+  { t:"hrvati", q:"Prema Porfirogenetu, tko je predvodio Hrvate pri doseljenju?", o:["Petorica braće i dvije sestre","Knez Borna","Car Heraklije osobno","Avarski kagan"], e:"Došli su u Dalmaciju na poziv cara Heraklija – danas se ta Heraklijeva uloga uglavnom odbacuje." },
+  { t:"hrvati", q:"Na čije se djelo oslanja gotska teorija?", o:["Tome Arhiđakona","Konstantina Porfirogeneta","Einharda","Marcelina"], e:"Toma ime Goti koristi kao pogrdni nadimak za Slavene." },
+  { t:"hrvati", q:"Na koje se nalaze oslanja iranska teorija?", o:["Na Tanajske ploče s ušća Dona","Na Bašćansku ploču","Na Trpimirovu darovnicu","Na Višeslavovu krstionicu"], e:"Na pločama su imena Horoathos i Horoúathos." },
+  { t:"hrvati", q:"Što tvrdi teorija o društvenom dualizmu (dvojstvu)?", o:["Hrvati su bili vladajući sloj nad pokorenim Slavenima","Hrvati su poslavenjeni Goti","Hrvati su iransko pleme","Hrvati su avarski graničari"], e:"Hrvatsko pleme podčinilo je ranije naseljene Slavene." },
+  { t:"hrvati", q:"Koje je mišljenje o podrijetlu Hrvata danas općeprihvaćeno?", o:["Slavensko podrijetlo ili doseljenje već poslavenjenih Hrvata","Gotsko podrijetlo","Hrvati su potomci Rimljana","Hrvati su doseljenici iz Skandinavije"], e:"Ipak se ne smiju zanemariti iranski i avarski utjecaji te romanizirano stanovništvo Dalmacije." },
+  { t:"hrvati", q:"Kada su se Hrvati, prema prevladavajućem mišljenju, doselili na istočni Jadran?", o:["Tijekom 7. stoljeća","Godine 375.","Krajem 10. stoljeća","Za vladavine Karla Velikog"], e:"Doseljenje nije bilo odjednom, nego je trajalo više godina." },
+  { t:"hrvati", q:"Gdje su se sklonile izbjeglice iz Salone?", o:["U Dioklecijanovu palaču – zametak Splita","U Ragusium (Dubrovnik)","Na otok Krk","U Sisak"], e:"Izbjegli Epidaurani (Cavtat) sklonili su se u Ragusium – budući Dubrovnik." },
+  { t:"hrvati", q:"Kako se u ranom srednjem vijeku zvao otok Krk?", o:["Kurikta (Vekla)","Arba","Apsor","Jadera"], e:"Arba = Rab, Apsor = Osor, Jadera = Zadar." },
+  { t:"hrvati", q:"Zašto je papa Ivan IV. 641. poslao opata Martina u Dalmaciju i Istru?", o:["Da otkupi zarobljene kršćane","Da okruni hrvatskog kralja","Da ukine glagoljicu","Da osnuje ninsku biskupiju"], e:"Martin se vratio u Rim s relikvijama svetaca stradalih u Dioklecijanovim progonima." },
+
+  { t:"knez", q:"Što je sklavinija?", o:["Manja politička zajednica doseljenih Slavena","Bizantska vojna oblast","Franačka granična marka","Crkvena biskupija"], e:"Sklavinija = „zemlja Slavena“; na čelu je obično knez." },
+  { t:"knez", q:"Tko je bio na čelu županije?", o:["Župan – knežev službenik","Ban","Markgrof","Biskup"], e:"Sklavinije su se dijelile na manje cjeline – županije." },
+  { t:"knez", q:"Kako se još naziva sklavinija Paganija?", o:["Neretvanska kneževina","Donjopanonska kneževina","Hum","Travunija"], e:"Ime svjedoči da su njezini stanovnici dugo ostali nekršteni (pogani)." },
+  { t:"knez", q:"Gdje je bilo središte Donjopanonske kneževine?", o:["U Sisku","U Ninu","U Kninu","U Splitu"], e:"Kneževina između Save i Drave nastala je pod franačkim utjecajem." },
+  { t:"knez", q:"Jesu li u ranom srednjem vijeku postojali nazivi „Primorska Hrvatska” i „Posavska Hrvatska”?", o:["Ne – izmislili su ih moderni povjesničari","Da – tako su ih zvali Franci","Da – tako ih zove Porfirogenet","Samo naziv Posavska Hrvatska"], e:"Ispravno je: Dalmatinska i Donjopanonska kneževina." },
+  { t:"knez", q:"Tko je od 819. bio knez Dalmatinske kneževine i franački saveznik?", o:["Borna","Ljudevit","Trpimir","Branimir"], e:"U to doba dolaze franački misionari iz Akvilejske patrijaršije." },
+  { t:"knez", q:"Tko je 819.–822. podigao ustanak protiv Franaka?", o:["Ljudevit, knez Donjopanonske kneževine","Borna","Domagoj","Mislav"], e:"Ljudevit je ubijen 823. u bijegu od Franaka." },
+
+  { t:"st9", q:"Koji je knez s neretvanskim knezom Družakom stao protiv Venecije?", o:["Mislav","Trpimir","Branimir","Zdeslav"], e:"Mletački dužd sklopio je 839. mir s hrvatskim i neretvanskim knezom." },
+  { t:"st9", q:"Po čemu je važna Trpimirova darovnica iz 852.?", o:["Prvi put hrvatsko ime u vladarskom naslovu („knez Hrvata”)","Prvi spomen Bosne","Prvo papinsko priznanje","Prvi tekst na glagoljici"], e:"Trpimir je osnivač dinastije Trpimirovića." },
+  { t:"st9", q:"Gdje je Trpimir osnovao prvi benediktinski samostan u Hrvatskoj?", o:["U Rižinicama kraj Klisa","U Biogradu","U Vrani","U Ninu"], e:"Ondje je pronađen kameni ulomak s Trpimirovim imenom." },
+  { t:"st9", q:"Koji je benediktinac boravio na Trpimirovu dvoru i nazvao ga kraljem?", o:["Gottschalk (Gotšalk)","Majnard","Gebizon","Einhard"], e:"Ipak, Trpimir zapravo nije bio kralj." },
+  { t:"st9", q:"Koga su Mlečani prozvali „najgorim knezom Slavena”?", o:["Domagoja","Branimira","Trpimira","Muncimira"], e:"Domagoj je poticao gusarske prepade na mletačke brodove." },
+  { t:"st9", q:"Tko je Zdeslava doveo na hrvatsko prijestolje?", o:["Bizantski car Bazilije I.","Papa Ivan VIII.","Karlo Veliki","Mletački dužd"], e:"Hrvati su ga ubrzo svrgnuli i na vlast doveli Branimira." },
+  { t:"st9", q:"Koji je papa 879. blagoslovio Branimira, njegov narod i državu?", o:["Ivan VIII.","Ivan X.","Lav III.","Grgur VII."], e:"To je značilo prvo međunarodno priznanje neovisnosti Hrvatske kneževine." },
+  { t:"st9", q:"Koji je najstariji kameni zapis hrvatskog imena?", o:["Natpis iz Šopota kraj Benkovca (Branimir – „knez Hrvata”)","Bašćanska ploča","Trpimirova darovnica","Tanajske ploče"], e:"Natpis spominje Branimira kao „kneza Hrvata“." },
+  { t:"st9", q:"Što se dogodilo 887. u pomorskom boju kod Makarske?", o:["Poginuo je mletački dužd","Tomislav je pobijedio Bugare","Normani su zarobili kralja","Arapi su osvojili Bari"], e:"Venecija je zatim više od 100 godina plaćala danak za slobodnu plovidbu." },
+  { t:"st9", q:"Čijim je dolaskom na vlast označen povratak dinastije Trpimirovića?", o:["Muncimirovim (Mutimirovim)","Branimirovim","Domagojevim","Zdeslavovim"], e:"Muncimir, Trpimirov sin, sjedište je imao u Bijaćima kraj Trogira." },
+
+  { t:"tomislav", q:"Koji je papa u pismu 925. Tomislava nazvao kraljem?", o:["Ivan X.","Ivan VIII.","Lav VI.","Grgur VII."], e:"Tomislav je prvi hrvatski vladar koji je nosio kraljevski naslov." },
+  { t:"tomislav", q:"Čiju je bugarsku vojsku porazio Tomislav?", o:["Simeonovu (vojskovođa Alogobotur)","Samuilovu","Borisovu","Atilinu"], e:"Tomislav je bio bizantski saveznik protiv bugarskog vladara Simeona." },
+  { t:"tomislav", q:"Kome se Tomislav suprotstavljao na sjeveru?", o:["Mađarima","Avarima","Francima","Normanima"], e:"Mađari su uništili Donjopanonsku kneževinu, a Tomislav je proširio vlast na njezin zapadni dio." },
+  { t:"tomislav", q:"Tko je na saboru 925. potvrđen kao vrhovni crkveni poglavar u Hrvatskoj?", o:["Splitski nadbiskup","Ninski biskup Grgur","Zadarski biskup","Akvilejski patrijarh"], e:"Split je bio nasljednik antičke Salone, crkvenog središta Dalmacije." },
+  { t:"tomislav", q:"Što je odlučeno na drugom splitskom saboru 928.?", o:["Ukinuta je ninska biskupija","Uvedena je glagoljica","Tomislav je okrunjen","Osnovana je biskupija u Ninu"], e:"Njezino područje razdijeljeno je između dalmatinskih biskupija." },
+  { t:"tomislav", q:"Što su sabori odlučili o glagoljaškim svećenicima?", o:["Ne smiju biti zaređeni ni promaknuti ako ne nauče latinski","Moraju napustiti Hrvatsku","Postaju biskupi","Smiju služiti samo na grčkom"], e:"Bogoslužje na slavenskom ipak im je ostalo dopušteno." },
+  { t:"tomislav", q:"Što je Porfirogenet napisao o vojnoj snazi Hrvatske u Tomislavovo doba?", o:["60 000 konjanika, 100 000 pješaka i 80 bojnih lađa","10 000 konjanika i 5 lađa","Da Hrvatska nema vojske","Da Hrvatska ima samo mornaricu"], e:"Brojke su preuveličane." },
+
+  { t:"kresimir", q:"Tko je prvi poimence poznati hrvatski ban?", o:["Pribina","Gojko","Dmitar Zvonimir","Borna"], e:"Pribina je zbacio kralja Miroslava i doveo Mihaela Krešimira II." },
+  { t:"kresimir", q:"Što je kraljica Jelena dala sagraditi?", o:["Crkvu sv. Marije na Otoku kraj Solina","Katedralu u Splitu","Samostan u Rižinicama","Crkvu sv. Petra u Rimu"], e:"U njoj su kasnije pokapani hrvatski kraljevi, a i sama Jelena." },
+  { t:"kresimir", q:"Koji se kralj smatra prvim okrunjenim hrvatskim kraljem?", o:["Stjepan Držislav","Tomislav","Petar Krešimir IV.","Trpimir"], e:"Krunu mu je poslao bizantski car Bazilije II.; ime Stjepan na grčkom znači „okrunjen“." },
+  { t:"kresimir", q:"Koji je nadimak imao Svetoslav, Držislavov sin?", o:["Suronja","Bugaroubojica","Ćelavi","Pobožni"], e:"Braća Krešimir III. i Gojslav svrgnula su ga oko 1000." },
+  { t:"kresimir", q:"Što je oko 1000. učinio mletački dužd?", o:["S flotom je zaplovio uz obalu i preuzeo vlast nad dalmatinskim gradovima","Okrunio je hrvatskog kralja","Osvojio je Sisak","Ukinuo je glagoljicu"], e:"Gradovi su prestali plaćati danak hrvatskom vladaru." },
+  { t:"kresimir", q:"Gdje je bila prijestolnica Petra Krešimira IV.?", o:["U Biogradu","U Kninu","U Splitu","U Ninu"], e:"U Biogradu je i okrunjen; Šibenik se tada prvi put spominje kao kraljevo boravište." },
+  { t:"kresimir", q:"Kako je Petar Krešimir IV. nazivao Jadransko more?", o:["„Naše dalmatinsko more”","„Mare nostrum”","„Mletačko more”","„Bizantsko more”"], e:"Njegov je naslov bio „kralj Hrvatske i Dalmacije“." },
+  { t:"kresimir", q:"U kojoj je ispravi Petar Krešimir IV. zapisao da je Bog proširio kraljevstvo „na kopnu i na moru”?", o:["U darovnici za otok Maun (1069.)","U Bašćanskoj ploči","U Trpimirovoj darovnici","U pismu papi Ivanu VIII."], e:"Isprava svjedoči o širenju vlasti na dalmatinske gradove i otoke." },
+  { t:"kresimir", q:"Što je zabranio crkveni sabor u Splitu 1060.?", o:["Slavenski jezik i glagoljicu u bogoslužju","Gradnju samostana","Krunidbu kraljeva","Plaćanje desetine"], e:"Svećenici nisu smjeli nositi bradu ni se ženiti. Slavensko bogoslužje ipak se održalo." },
+  { t:"kresimir", q:"Gdje su bila glavna uporišta glagoljaša?", o:["Na otocima Krku i Cresu","U Splitu i Zadru","U Sisku","U Biogradu"], e:"Odande se njihov utjecaj širio prema Istri i Primorju." },
+
+  { t:"zvonimir", q:"Gdje je i kada okrunjen Dmitar Zvonimir?", o:["1076. u crkvi sv. Petra i Mojsija u Solinu","1076. u Rimu","925. u Biogradu","1089. u Kninu"], e:"Okrunio ga je papin poslanik Gebizon." },
+  { t:"zvonimir", q:"Od kojeg je pape Zvonimir dobio krunu?", o:["Grgura VII.","Ivana X.","Nikole II.","Lava III."], e:"Zauzvrat je postao papin vazal." },
+  { t:"zvonimir", q:"Koliki je godišnji danak Zvonimir obećao papi?", o:["200 dukata","100 dukata","1000 dukata","Desetinu prihoda"], e:"Papi je dao i samostan sv. Grgura u Vrani." },
+  { t:"zvonimir", q:"Što je papa dobio Zvonimirovim vazalstvom?", o:["Saveznika u sukobu s njemačkim kraljem Henrikom IV.","Vlast nad Venecijom","Dalmatinske gradove","Pomoć protiv Arapa"], e:"Zvonimir je za uzvrat stekao papinu zaštitu." },
+  { t:"zvonimir", q:"Tko je bila Zvonimirova supruga?", o:["Jelena (Ilona) Arpadović, ugarska princeza","Kraljica Jelena iz Solina","Teodora","Jelena Krešimirova"], e:"Taj brak mu je osigurao istaknut položaj u Kraljevstvu." },
+  { t:"zvonimir", q:"Na kojem je otoku pronađena Bašćanska ploča?", o:["Na Krku","Na Rabu","Na Cresu","Na Braču"], e:"Ploča spominje kralja Zvonimira i svjedoči da je podupirao glagoljaše." },
+  { t:"zvonimir", q:"U kojem je gradu Zvonimir najviše stolovao?", o:["U Kninu","U Biogradu","U Ninu","U Zadru"], e:"Kraj Knina je uspostavio stolnu crkvu, na lokalitetu Biskupija." },
+  { t:"zvonimir", q:"Što govori legenda o Zvonimirovoj smrti (1089.)?", o:["Ubili su ga podanici na Kosovu polju jer ih je htio voditi u križarski rat","Poginuo je u bitki s Bizantom","Umro je u samostanu","Utopio se kod Drača"], e:"Prema legendi, na samrti je proklinjao Hrvate da nikad više nemaju vladara svoje krvi." },
+  { t:"zvonimir", q:"Tko je bio posljednji vladar iz dinastije Trpimirovića?", o:["Stjepan III.","Dmitar Zvonimir","Petar Krešimir IV.","Stjepan Držislav"], e:"Umro je oko 1091. bez muških potomaka." },
+  { t:"zvonimir", q:"Koja je dinastija došla na vlast nakon izumiranja Trpimirovića?", o:["Ugarski Arpadovići","Karolinzi","Komneni","Merovinzi"], e:"Prije toga Hrvatska je zapala u razdoblje borbi za prijestolje." },
+  { t:"zvonimir", q:"Protiv koga je Zvonimir s Normanima ratovao 1081. (napad na Drač)?", o:["Protiv Bizanta","Protiv Venecije","Protiv Ugarske","Protiv pape"], e:"Normani su pobijedili na kopnu, ali je Bizant Veneciji predao vrhovništvo nad Dalmacijom." }
+];
+
+// ---------- pomoćno ----------
+const $ = (id) => document.getElementById(id);
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem("povijest." + k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem("povijest." + k, JSON.stringify(v)); } catch (e) {} }
+};
+function shuffle(a) {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+const topicName = (id) => (TOPICS.find(t => t.id === id) || {}).name || "";
+
+// ---------- tabovi ----------
+const TABS = ["uci", "kartice", "kronologija", "kviz"];
+function showTab() {
+  const t = TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "uci";
+  TABS.forEach(x => $("tab-" + x).classList.toggle("hidden", x !== t));
+  document.querySelectorAll("nav.tabs a").forEach(a => { if (a.dataset.tab === t) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", showTab);
+
+// ---------- UČI ----------
+let learned = new Set(store.get("learned") || []);
+function renderLearn() {
+  const chs = document.querySelectorAll("details.ch");
+  chs.forEach(d => {
+    const done = learned.has(d.dataset.id);
+    d.classList.toggle("done", done);
+    d.querySelector(".learned input").checked = done;
+  });
+  $("learnBar").style.width = (learned.size / chs.length * 100) + "%";
+  $("learnTxt").textContent = "Naučeno " + learned.size + " / " + chs.length;
+}
+document.querySelectorAll("details.ch").forEach(d => {
+  d.querySelector(".learned input").addEventListener("change", (e) => {
+    e.target.checked ? learned.add(d.dataset.id) : learned.delete(d.dataset.id);
+    store.set("learned", [...learned]);
+    renderLearn();
+  });
+});
+document.querySelectorAll("[data-goto]").forEach(b => b.addEventListener("click", () => {
+  selTopics = new Set([b.dataset.goto]);
+  store.set("topics", [...selTopics]);
+  location.hash = "#kviz";
+  showQz("qzStart"); renderStart();
+}));
+
+// ---------- KARTICE ----------
+let fc = { deck: [], i: 0, total: 0 };
+function initFcSelect() {
+  const s = $("fcTopic");
+  s.innerHTML = '<option value="">Sve teme</option>' + TOPICS.map(t => '<option value="' + t.id + '">' + t.name + "</option>").join("");
+  s.value = store.get("fcTopic") || "";
+  s.onchange = () => { store.set("fcTopic", s.value); fcStart(); };
+}
+function fcStart() {
+  const tp = $("fcTopic").value;
+  fc.deck = shuffle(Q.filter(q => !tp || q.t === tp));
+  fc.total = fc.deck.length;
+  $("fcDone").classList.add("hidden");
+  $("flash").classList.remove("hidden");
+  $("fcBtns").classList.remove("hidden");
+  fcShow();
+}
+function fcShow() {
+  if (!fc.deck.length) {
+    $("flash").classList.add("hidden"); $("fcBtns").classList.add("hidden");
+    $("fcDone").classList.remove("hidden");
+    $("fcInfo").textContent = "Gotovo: " + fc.total + " / " + fc.total;
+    return;
+  }
+  const c = fc.deck[0];
+  $("flash").classList.remove("flipped");
+  setTimeout(() => {
+    $("fcTopicName").textContent = topicName(c.t);
+    $("fcQ").textContent = c.q;
+    $("fcA").textContent = c.o[0];
+    $("fcE").textContent = c.e;
+  }, 120);
+  $("fcInfo").textContent = "Znaš " + (fc.total - fc.deck.length) + " / " + fc.total + " · preostalo " + fc.deck.length;
+}
+function fcFlip() { $("flash").classList.toggle("flipped"); }
+function fcAnswer(know) {
+  if (!fc.deck.length) return;
+  const c = fc.deck.shift();
+  if (!know) fc.deck.splice(Math.min(fc.deck.length, 3 + Math.floor(Math.random() * 3)), 0, c); // vrati je uskoro
+  fcShow();
+}
+$("flash").addEventListener("click", fcFlip);
+$("fcYes").onclick = () => fcAnswer(true);
+$("fcNo").onclick = () => fcAnswer(false);
+$("fcRestart").onclick = fcStart;
+$("fcAgain").onclick = fcStart;
+
+// ---------- KRONOLOGIJA ----------
+function renderTl() {
+  $("tl").innerHTML = "";
+  TIMELINE.forEach(([y, ev, cro]) => {
+    const li = document.createElement("li");
+    li.innerHTML = '<span class="y"></span><span class="ev"></span>';
+    li.children[0].textContent = y;
+    li.children[1].textContent = ev;
+    if (cro) li.children[1].classList.add("cro");
+    li.children[0].onclick = li.children[1].onclick = (e) => e.currentTarget.classList.add("shown");
+    $("tl").appendChild(li);
+  });
+}
+function tlMode(mode) {
+  const tl = $("tl");
+  tl.classList.toggle("hide-ev", mode === "ev");
+  tl.classList.toggle("hide-y", mode === "y");
+  tl.querySelectorAll(".shown").forEach(x => x.classList.remove("shown"));
+  $("tlShowAll").setAttribute("aria-pressed", mode === "all");
+  $("tlHideEv").setAttribute("aria-pressed", mode === "ev");
+  $("tlHideY").setAttribute("aria-pressed", mode === "y");
+}
+$("tlShowAll").onclick = () => tlMode("all");
+$("tlHideEv").onclick = () => tlMode("ev");
+$("tlHideY").onclick = () => tlMode("y");
+
+// ---------- KVIZ ----------
+const COUNTS = [10, 20, 30, 0];
+let selTopics = new Set(store.get("topics") || TOPICS.map(t => t.id));
+let selCount = store.get("count") ?? 20;
+let run = null;
+
+function showQz(id) { ["qzStart", "qzRun", "qzResult"].forEach(s => $(s).classList.toggle("hidden", s !== id)); window.scrollTo(0, 0); }
+
+function renderStart() {
+  const box = $("topics"); box.innerHTML = "";
+  TOPICS.forEach(t => {
+    const n = Q.filter(q => q.t === t.id).length;
+    const b = document.createElement("button");
+    b.className = "chip"; b.type = "button";
+    b.setAttribute("aria-pressed", selTopics.has(t.id));
+    b.innerHTML = t.name + "<small>" + n + "</small>";
+    b.onclick = () => { selTopics.has(t.id) ? selTopics.delete(t.id) : selTopics.add(t.id); store.set("topics", [...selTopics]); renderStart(); };
+    box.appendChild(b);
+  });
+  const cb = $("counts"); cb.innerHTML = "";
+  COUNTS.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.type = "button";
+    b.setAttribute("aria-pressed", selCount === c);
+    b.textContent = c === 0 ? "Sva" : c;
+    b.onclick = () => { selCount = c; store.set("count", c); renderStart(); };
+    cb.appendChild(b);
+  });
+  const avail = Q.filter(q => selTopics.has(q.t)).length;
+  $("avail").textContent = avail ? "Dostupno pitanja: " + avail : "Odaberi barem jednu temu";
+  $("go").disabled = !avail;
+  const best = store.get("best");
+  $("best").textContent = best ? "Najbolji rezultat: " + best.pct + "% (" + best.score + "/" + best.total + ")" : "";
+}
+
+function startRun(pool) {
+  const items = shuffle(pool).map(q => ({ ...q, opts: shuffle(q.o.map((text, idx) => ({ text, correct: idx === 0 }))) }));
+  run = { items, i: 0, score: 0, wrong: [], answered: false };
+  showQz("qzRun");
+  renderQ();
+}
+
+function renderQ() {
+  const it = run.items[run.i];
+  run.answered = false;
+  $("pos").textContent = "Pitanje " + (run.i + 1) + " / " + run.items.length;
+  $("live").textContent = "Točno: " + run.score;
+  $("barFill").style.width = (run.i / run.items.length * 100) + "%";
+  $("qTopic").textContent = topicName(it.t);
+  $("qText").textContent = it.q;
+  const box = $("opts"); box.innerHTML = "";
+  it.opts.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt"; b.type = "button";
+    b.innerHTML = '<span class="k">' + (idx + 1) + "</span><span></span>";
+    b.lastChild.textContent = o.text;
+    b.onclick = () => answer(idx);
+    box.appendChild(b);
+  });
+  $("fb").className = "fb"; $("fb").innerHTML = "";
+  $("next").classList.add("hidden");
+}
+
+function answer(idx) {
+  if (!run || run.answered) return;
+  run.answered = true;
+  const it = run.items[run.i];
+  const ok = it.opts[idx].correct;
+  [...$("opts").children].forEach((b, k) => {
+    b.disabled = true;
+    if (it.opts[k].correct) b.classList.add("ok");
+    else if (k === idx) b.classList.add("bad");
+  });
+  if (ok) run.score++; else run.wrong.push({ q: it, yours: it.opts[idx].text });
+  const fb = $("fb");
+  fb.className = "fb show " + (ok ? "ok" : "bad");
+  fb.innerHTML = "<b></b><span></span>";
+  fb.firstChild.textContent = ok ? "Točno!" : "Netočno. Točan odgovor: " + it.o[0];
+  fb.lastChild.textContent = it.e;
+  $("live").textContent = "Točno: " + run.score;
+  const nx = $("next");
+  nx.textContent = run.i + 1 < run.items.length ? "Dalje" : "Pogledaj rezultat";
+  nx.classList.remove("hidden");
+  nx.focus();
+}
+
+function nextQ() {
+  if (!run || !run.answered) return;
+  run.i++;
+  if (run.i < run.items.length) renderQ(); else finish();
+}
+
+function finish() {
+  const total = run.items.length;
+  const pct = Math.round(run.score / total * 100);
+  $("scorePct").textContent = pct + "%";
+  $("scoreText").textContent = "Točno " + run.score + " od " + total + " pitanja.";
+  $("scoreMsg").textContent =
+    pct === 100 ? "Savršeno! Spremna si za test." :
+    pct >= 85 ? "Odlično! Još malo i sve znaš." :
+    pct >= 65 ? "Dobro je – ponovi pogrešne odgovore." :
+    pct >= 50 ? "Na pola puta. Pročitaj poglavlja pa probaj ponovno." :
+    "Treba još učiti – kreni od kartice „Uči”, pa ponovi kviz.";
+  const best = store.get("best");
+  if (total >= 10 && (!best || pct > best.pct)) store.set("best", { pct, score: run.score, total });
+  const list = $("wrongList"); list.innerHTML = "";
+  run.wrong.forEach(w => {
+    const li = document.createElement("li");
+    li.innerHTML = "<div></div><div class='yours'></div><div class='right'></div>";
+    li.children[0].textContent = w.q.q;
+    li.children[1].textContent = "Tvoj odgovor: " + w.yours;
+    li.children[2].textContent = "Točno: " + w.q.o[0];
+    list.appendChild(li);
+  });
+  $("wrongWrap").classList.toggle("hidden", !run.wrong.length);
+  $("retryWrong").classList.toggle("hidden", !run.wrong.length);
+  showQz("qzResult");
+}
+
+$("go").onclick = () => {
+  let pool = shuffle(Q.filter(q => selTopics.has(q.t)));
+  if (selCount) pool = pool.slice(0, selCount);
+  startRun(pool);
+};
+$("allTopics").onclick = () => { selTopics = new Set(TOPICS.map(t => t.id)); store.set("topics", [...selTopics]); renderStart(); };
+$("next").onclick = nextQ;
+$("quit").onclick = () => { if (confirm("Prekinuti kviz?")) { showQz("qzStart"); renderStart(); } };
+$("again").onclick = () => { showQz("qzStart"); renderStart(); };
+$("retryWrong").onclick = () => startRun(run.wrong.map(w => Q.find(q => q.q === w.q.q)));
+
+// ---------- tipkovnica ----------
+document.addEventListener("keydown", (e) => {
+  const tab = location.hash.slice(1);
+  if (tab === "kviz" && !$("qzRun").classList.contains("hidden")) {
+    if (["1", "2", "3", "4"].includes(e.key)) answer(Number(e.key) - 1);
+    else if (e.key === "Enter" && run && run.answered) { e.preventDefault(); nextQ(); }
+  } else if (tab === "kartice") {
+    if (e.key === " ") { e.preventDefault(); fcFlip(); }
+    else if (e.key === "ArrowRight") fcAnswer(true);
+    else if (e.key === "ArrowLeft") fcAnswer(false);
+  }
+});
+
+// ---------- start ----------
+renderLearn();
+initFcSelect(); fcStart();
+renderTl();
+renderStart();
+showTab();
+</script>
+</body>
+</html>
